@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "axios": "^1.13.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx concurrently \"npx ts-node gateway/index.ts\" \"npx ts-node user/index.ts\" \"npx ts-node catalog/index.ts\" \"npx ts-node booking/index.ts\" \"npx ts-node payment/index.ts\" \"npx ts-node waiting-room/index.ts\" \"npx ts-node admin/index.ts\" \"npx ts-node notification/index.ts\""
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.8",
+    "@types/axios": "^0.9.36",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.0.3",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
