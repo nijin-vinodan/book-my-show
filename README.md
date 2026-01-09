@@ -36,9 +36,99 @@ The application handles high scale through a modular design where services run a
 | **Waiting Room** | 3005 | Token generation, Queue management |
 | **Admin** | 3006 | Admin operations and seeding |
 
+### System Architecture
+```mermaid
+graph TD
+    Client[Client UI (React)] -->|HTTP/REST| Gateway[API Gateway :3000]
+    
+    subgraph Microservices
+        Gateway -->|Proxy| Catalog[Catalog Service :3001]
+        Gateway -->|Proxy| Booking[Booking Service :3002]
+        Gateway -->|Proxy| Payment[Payment Service :3003]
+        Gateway -->|Proxy| User[User Service :3004]
+        Gateway -->|Proxy| Admin[Admin Service :3006]
+        Gateway -->|Proxy| WaitingRoom[Waiting Room Service :3005]
+    end
+
+    subgraph Infrastructure
+        DB[(MongoDB)]
+    end
+
+    Catalog --> DB
+    Booking --> DB
+    Payment --> DB
+    User --> DB
+    Admin --> DB
+    WaitingRoom --> DB
+    
+    Client -.->|Redirect if Busy| WaitingRoom
+```
+
 ## 💾 Database Schema
 
 The application uses MongoDB with the following core collections spread across service boundaries:
+
+### Entity Relationship Diagram
+```mermaid
+erDiagram
+    User ||--o{ Booking : makes
+    User {
+        string name
+        string email
+        string passwordHash
+        string role
+    }
+
+    Movie ||--o{ Show : features
+    Movie {
+        string title
+        string description
+        string genre
+        int duration
+    }
+
+    Location ||--o{ Theater : has
+    Location {
+        string name
+        string city
+    }
+
+    Theater ||--o{ Screen : contains
+    Theater ||--o{ Show : hosts
+    Theater {
+        string name
+        string address
+    }
+
+    Screen ||--o{ Show : screens
+    Screen {
+        string name
+        json seatLayout
+    }
+
+    Show ||--o{ Booking : has
+    Show ||--o{ SeatLock : has
+    Show {
+        datetime startTime
+        number basePrice
+    }
+
+    Booking {
+        objectId userId
+        objectId showId
+        json seats
+        number totalAmount
+        string status
+    }
+
+    SeatLock {
+        objectId userId
+        objectId showId
+        string seatRow
+        string seatNumber
+        datetime lockedAt
+    }
+```
 
 ### User Service
 - **User**: Stores `name`, `email`, `passwordHash`, `role` (user/admin).
