@@ -7,6 +7,7 @@ import MoviePage from './pages/MoviePage';
 import SeatSelectionPage from './pages/SeatSelectionPage';
 import PaymentPage from './pages/PaymentPage';
 import WaitingRoomPage from './pages/WaitingRoomPage';
+import BookingConfirmationPage from './pages/BookingConfirmationPage';
 import AdminPage from './pages/AdminPage';
 
 import './index.css';
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/movie/:id" element={<MoviePage />} />
         <Route path="/book/:showId" element={<SeatSelectionPage />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/confirmation" element={<BookingConfirmationPage />} />
         <Route path="/waiting-room" element={<WaitingRoomPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="*" element={<Navigate to="/" />} />

@@ -35,8 +35,17 @@ const PaymentPage: React.FC = () => {
                 totalAmount: total,
                 paymentToken: 'mock-visa-token'
             });
-            alert('Booking Confirmed! Check console/notification.');
-            navigate('/');
+            // alert('Booking Confirmed! Check console/notification.');
+            navigate('/confirmation', {
+                state: {
+                    totalAmount: total,
+                    bookingId: 'MOCK-' + Math.floor(Math.random() * 10000),
+                    movie: state.movie,
+                    theater: state.theater,
+                    startTime: state.startTime,
+                    seats: seats
+                }
+            });
         } catch (e: any) {
             alert('Payment Failed');
         }

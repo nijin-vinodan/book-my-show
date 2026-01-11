@@ -1,4 +1,6 @@
-# BookMyShow Clone
+# BookMyShow - Clone Application
+
+Note: This application is build for learning purpose.
 
 A robust, microservices-oriented ticket booking application designed to handle high-concurrency scenarios, featuring a virtual waiting room and distributed service architecture.
 
@@ -6,9 +8,15 @@ A robust, microservices-oriented ticket booking application designed to handle h
 
 ### Core Booking
 - **Movie Catalog**: Browse movies, theaters, and showtimes across different cities.
-- **Interactive Seat Selection**: Real-time visual seat map with different seat types (Standard, VIP).
-- **Seat Locking**: Concurrency handling with 10-minute temporary seat locks to prevent double booking.
+- **Interactive Seat Selection**: Enhanced real-time visual seat map with different seat types (Standard, VIP), featuring a selection summary footer and intelligent layout rendering.
+- **Seat Locking**: Robust concurrency handling with 10-minute temporary seat locks to prevent double booking.
+- **Booking Confirmation**: Comprehensive confirmation page with a generated QR code containing booking details (Movie, Date, Seats).
 - **Payment Simulation**: Component for processing payments and confirming bookings.
+
+### UI/UX Enhancements
+- **Modern Interface**: Polished dark-themed UI built with Tailwind CSS.
+- **Responsive Design**: Optimized layouts for various screen sizes.
+- **Dynamic Feedback**: Real-time updates for seat availability and booking status.
 
 ### Advanced System Features
 - **Virtual Waiting Room**: Automatic queue system for high-demand bookings. Limits traffic surges using token-based validation.
@@ -35,6 +43,7 @@ The application handles high scale through a modular design where services run a
 | **User** | 3004 | Authentication (JWT), User Profiles |
 | **Waiting Room** | 3005 | Token generation, Queue management |
 | **Admin** | 3006 | Admin operations and seeding |
+| **Notification** | 3007 | Notification dispatch service |
 
 ### System Architecture
 ```mermaid

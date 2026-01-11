@@ -65,7 +65,16 @@ const SeatSelectionPage: React.FC = () => {
             });
             // Go to Pay
             const total = selectedSeats.reduce((sum, s) => sum + s.price, 0);
-            navigate('/payment', { state: { showId, seats: selectedSeats, total } });
+            navigate('/payment', {
+                state: {
+                    showId,
+                    seats: selectedSeats,
+                    total,
+                    movie: show!.movieId,
+                    theater: show!.theaterId,
+                    startTime: show!.startTime
+                }
+            });
         } catch (e: any) {
             alert(e.response?.data || 'Failed to lock seats');
             fetchSeatData(); // refresh
@@ -104,9 +113,9 @@ const SeatSelectionPage: React.FC = () => {
                                             key={idx}
                                             disabled={seat.status !== 'AVAILABLE'}
                                             onClick={() => handleSeatClick(row.rowLabel, seat)}
-                                            className={`w-8 h-8 rounded text-xs font-bold border ${bgClass} transition`}
+                                            className={`w-6 h-6 rounded text-xs font-bold border ${bgClass} transition`}
                                         >
-                                            {seat.number}
+                                            {/* {seat.number} */}
                                         </button>
                                     );
                                 })}
@@ -122,11 +131,13 @@ const SeatSelectionPage: React.FC = () => {
             </div>
 
             {selectedSeats.length > 0 && (
-                <div className="fixed bottom-0 w-full bg-white text-black p-4 shadow-2xl flex justify-between items-center">
+                <div className="fixed bottom-0 w-full bg-white text-black p-4 shadow-2xl flex justify-between items-center z-50">
                     <div>
-                        <span className="block text-sm text-gray-500">Total Price</span>
-                        <span className="font-bold text-xl">₹ {totalAmount}</span>
-                        <span className="text-xs ml-2 text-gray-500">({selectedSeats.length} Seats)</span>
+                        <span className="block text-sm text-gray-500">Selected Seats: <span className="font-semibold text-black">{selectedSeats.map(s => `${s.row}${s.number}`).join(', ')}</span></span>
+                        <div className="flex items-baseline gap-2">
+                            <span className="font-bold text-xl">₹ {totalAmount}</span>
+                            <span className="text-xs text-gray-500">({selectedSeats.length} Seats)</span>
+                        </div>
                     </div>
                     <button
                         onClick={handleProceed}

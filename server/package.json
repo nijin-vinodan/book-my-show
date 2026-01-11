@@ -4,7 +4,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx concurrently \"npx ts-node gateway/index.ts\" \"npx ts-node user/index.ts\" \"npx ts-node catalog/index.ts\" \"npx ts-node booking/index.ts\" \"npx ts-node payment/index.ts\" \"npx ts-node waiting-room/index.ts\" \"npx ts-node admin/index.ts\" \"npx ts-node notification/index.ts\""
+    "dev": "npx concurrently \"npx ts-node gateway/index.ts\" \"npx ts-node user/index.ts\" \"npx ts-node catalog/index.ts\" \"npx ts-node booking/index.ts\" \"npx ts-node payment/index.ts\" \"npx ts-node waiting-room/index.ts\" \"npx ts-node admin/index.ts\" \"npx ts-node notification/index.ts\"",
+    "seed": "curl -X POST http://localhost:3006/seed"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.8",
